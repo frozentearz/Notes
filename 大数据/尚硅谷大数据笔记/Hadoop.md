@@ -160,3 +160,22 @@
 - lib —— 依赖包，主要是so文件，系统相关文件
 - sbin —— hadoop 启动停止等程序
 - share —— 文档及各个组件的工具包
+
+### 第三节、Hadoop 的使用
+
+##### 1. Hadoop 三种运行模式
+
+1. 本地(独立)模式  [Local (Standalone) Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation)
+
+    > 在单节点上作为单个Java进程运行，对于调试很有用
+
+    <small>ps: 可以使用本地模式尝试运行官方grep和wordcount案例</small>
+
+2. 伪分布式模式  [Pseudo-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation)
+
+    > 以伪分布式模式在单节点上运行
+
+3. 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
+
+    > 搭建一个完整的集群
+
