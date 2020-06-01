@@ -175,6 +175,23 @@
 
     > 以伪分布式模式在单节点上运行
 
+    ###### 配置
+
+     1. hadoop-env.sh
+
+        配置具体的 `JAVA_HOME` 地址，因为跨节点可能会读不到对方节点的环境变量
+
+     2. core-site.xml
+
+        - 配置 fs.defaultFS，默认是使用 Linux 的文件系统。现在修改为 HDFS 文件系统
+        - 配置 hadoop.tmp.dir，默认目录在 /tmp 下，而操作系统在硬盘空间不足时会删除 /tmp 下的文件，从而导致 Hadoop 丢失数据，所以安全起见在 hadoop 安装路径下新建 data/tmp 用于保存数据
+
+     3. hdfs-site.xml
+
+        配置 dfs.replication，默认是3，指 HDFS 的副本数量，单节点建议改为1
+
+        **问：单节点在不改的情况下会在本地保存三份数据吗？为什么？ (待实操)**
+
 3. 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
     > 搭建一个完整的集群
