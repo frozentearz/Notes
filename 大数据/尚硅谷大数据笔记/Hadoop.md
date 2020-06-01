@@ -74,5 +74,4 @@
 
 #### 四、大数据技术生态体系
 
-![image-20200601014418210](C:\Users\Frazier\Desktop\NoteBook\Study\大数据\尚硅谷大数据笔记\image-20200601014418210.png)
-
+![image-20200601014418210](https://i.loli.net/2020/06/01/GAsaJTOxESY41gp.png)
