@@ -172,7 +172,7 @@
 
 > 以伪分布式模式在单节点上运行
 
-##### 配置伪分布式模式
+##### 配置 HDFS
 
  1. hadoop-env.sh
 
@@ -181,17 +181,49 @@
  2. core-site.xml
 
     - 配置 fs.defaultFS，默认是使用 Linux 的文件系统。现在修改为 HDFS 文件系统
+
+        ```xml
+        <property>
+            <name>fs.defaultFS</name>
+            <value>hdfs://HOSTNAME:9000</value>
+            <description>The name of the default file system.  A URI whose
+            scheme and authority determine the FileSystem implementation.  The
+            uri's scheme determines the config property (fs.SCHEME.impl) naming
+            the FileSystem implementation class.  The uri's authority is used to
+            determine the host, port, etc. for a filesystem.</description>
+        </property>
+        ```
+
     - 配置 hadoop.tmp.dir，默认目录在 /tmp 下，而操作系统在硬盘空间不足时会删除 /tmp 下的文件，从而导致 Hadoop 丢失数据，所以安全起见在 hadoop 安装路径下新建 data/tmp 用于保存数据
+
+        ```xml
+        <property>
+            <name>hadoop.tmp.dir</name>
+            <value>${HADOOP_HOME}/data/tmp</value>
+            <description>A base for other temporary directories.</description>
+        </property>
+        ```
 
  3. hdfs-site.xml
 
     配置 dfs.replication，默认是3，指 HDFS 的副本数量，单节点建议改为1
 
+    ```xml
+    <property>
+        <name>dfs.replication</name>
+          <value>1</value>
+          <description>Default block replication. 
+          The actual number of replications can be specified when the file is created.
+          The default is used if replication is not specified in create time.
+          </description>
+    </property>
+    ```
+    
     **问：单节点在不改的情况下会在本地保存三份数据吗？为什么？ (待实操)**
 
-##### 启动伪分布式模式
+##### 启动 HDFS
 
-1. 格式化 NameNode —— 为了生成工作空间，格式化之前防止Id不一致需要删除 /data 以及 /log 目录
+1. 格式化 NameNode —— 为了生成工作空间，格式化之前防止 ClusterId 不一致需要删除 /data 以及 /log 目录
 
     ```shell
     bin/hdfs namenode -format
@@ -214,7 +246,42 @@
     - jsp
     - ip:50070
 
-5. 
+##### 配置 YARN
+
+1. yarn-env.sh
+
+    修改 `JAVA_HOME`，原理同上
+
+2. yarn-site.xml
+
+    - 配置 yarn.nodemanager.aux-services，指获取 reduce 的数据获取方式，目前使用 shuffle 方式
+
+        ```xml
+        <property>
+            <description>A comma separated list of services where service name should only
+              contain a-zA-Z0-9_ and can not start with numbers</description>
+            <name>yarn.nodemanager.aux-services</name>
+            <value>mapreduce_shuffle</value>
+        </property>
+        ```
+
+    - 配置 yarn.resourcemanager.hostname ，指定 YARN 的 ResourceManager 的地址
+
+        ```xml
+        <property>
+            <description>The hostname of the RM.</description>
+            <name>yarn.resourcemanager.hostname</name>
+            <value>你的HOSTNAME</value>
+        </property>  
+        ```
+
+        
+
+3. mapred-env.sh
+
+4. mapred-site.xml
+
+##### 启动 YARN
 
 #### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
