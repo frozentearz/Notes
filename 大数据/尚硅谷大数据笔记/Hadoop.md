@@ -244,9 +244,9 @@
 4. 查看是否正常启动
 
     - jsp
-    - ip:50070
+    - ip:50070 (hadoop的web页面)
 
-##### 配置 YARN
+##### 配置 YARN 与 MapReduce (MapReduce 需要在 YARN 上运行)
 
 1. yarn-env.sh
 
@@ -265,7 +265,7 @@
         </property>
         ```
 
-    - 配置 yarn.resourcemanager.hostname ，指定 YARN 的 ResourceManager 的地址
+    - 配置 yarn.resourcemanager.hostname，指定 YARN 的 ResourceManager 的地址，默认0.0.0.0
 
         ```xml
         <property>
@@ -275,13 +275,41 @@
         </property>  
         ```
 
-        
-
 3. mapred-env.sh
 
-4. mapred-site.xml
+    配置 `JAVA_HOME`，同上
+
+4. mapred-site.xml (copy from mapred-site.xml.template)
+
+    配置 mapreduce.framework.name，指定 MapReduce 运行在 YARN 上
+
+    ```xml
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+        <description>The runtime framework for executing MapReduce jobs.
+        Can be one of local, classic or yarn.
+        </description>
+    </property>
+    ```
 
 ##### 启动 YARN
+
+0. 检查 NameNode 和 DataNode 已经启动
+
+1. 启动 YARN (RecourseManager和NodeManager)
+
+    ```shell
+    yarn-daemon.sh start resoucemanager
+    yarn-daemon.sh start nodemanager
+    ```
+
+    **如果不按此顺序启动会怎么样？**
+
+2. 查看是否启动
+
+    - jsp
+    - ip:8088/cluster (yarn的web页面)
 
 #### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
