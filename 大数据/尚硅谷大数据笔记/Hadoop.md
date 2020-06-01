@@ -92,7 +92,7 @@
     >
     >   因为克隆虚拟机会导致 MAC 地址一致，从而导致自带的第一个网卡无效
     >
-    >   需要删除无效网卡，新 MAC 地址网卡改名为 eth0，复制 MAC 地址到：
+    >   需要删除无效网卡，新 MAC 地址网卡改名为 eth0，复制新 MAC 地址到：
     >
     >   ```shell
     >   vim /etc/stsconfig/network-scripts/ifconfig-eth0
@@ -100,7 +100,7 @@
     >
     >   覆盖其中无效的 MAC 地址
     >
-    >   再修改静态 ip 为所需要的编号
+    >   再修改其中静态 ip 为所需要的 ip
 
 4.  修改主机名
 
@@ -148,3 +148,15 @@
 
 ##### 2. Hadoop 安装
 
+1. 下载&解压(好像需要编译，暂时先拿老师提供的已编译版本解压)
+
+2. 配置环境变量 `HADOOP_HOME`，添加 `HADOOP_HOME\bin` 和 `HADOOP_HOME\sbin` 到 `PATH`
+
+
+##### 3. Hadoop 目录结构
+
+- bin —— hadoop 组件调用命令(hadoop、hdfs、mapred、yarn)
+- etc —— hadoop 配置文件
+- lib —— 依赖包，主要是so文件，系统相关文件
+- sbin —— hadoop 启动停止等程序
+- share —— 文档及各个组件的工具包
