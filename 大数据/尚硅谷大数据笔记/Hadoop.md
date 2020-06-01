@@ -90,12 +90,52 @@
     >   sudo vim /etc/udev/reles.d/70-persistent-net.reles
     >   ```
     >
-    >   删除其中一个网卡，保留eth0
+    >   因为克隆虚拟机会导致 MAC 地址一致，从而导致自带的第一个网卡无效
+    >
+    >   需要删除无效网卡，新 MAC 地址网卡改名为 eth0，复制 MAC 地址到：
+    >
+    >   ```shell
+    >   vim /etc/stsconfig/network-scripts/ifconfig-eth0
+    >   ```
+    >
+    >   覆盖其中无效的 MAC 地址
+    >
+    >   再修改静态 ip 为所需要的编号
 
 4.  修改主机名
 
+    >   ```shell
+    >   sudo vim /etc/sysconfig/network
+    >   ```
+    >
+    >   修改其中 HOSTNAME 为所需要的主机别名
+
 5.  关闭防火墙
+
+    >   ```shell
+    >   # CentOS 6.5
+    >   servcie iptables status/restart/stop/start # 临时操作防火墙
+    >   chkconfig iptables off # 永久关闭防火墙
+    >   # CentOS 7.2
+    >   systemctl status/restart/stop/start/disable/enable firewalld.service
+    >   ```
 
 6.  创建用户，给权限
 
+    >   ```shell
+    >   su -
+    >   useradd xxx
+    >   passwd xxx
+    >   id xxx
+    >   vim /etc/sudoers # 在第92行添加一条跟root一致的配置
+    >   ```
+
 7.  创文件夹放大数据生态圈组件，改权限和所有者
+
+    >   ```shell
+    >   cd /opt
+    >   mkdir -p module software
+    >   chown xxx:xxx module/ software/
+    >   ```
+
+8.  SSH 测试连接
