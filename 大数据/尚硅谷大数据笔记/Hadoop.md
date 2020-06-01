@@ -392,8 +392,6 @@ sbin/mr-jobhistory-daemon.sh start historyserver
 
     IP:19888
 
-4. 
-
 #### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
 > 搭建一个完整的集群
