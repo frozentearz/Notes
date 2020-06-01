@@ -25,7 +25,7 @@
 
 #### **三、Hadoop 组成** :star:
 
-|           | Hadoop distributed file System | MapReduce          |                |
+|           | Hadoop distributed file System | MapReduce          | YARN           |
 | --------- | ------------------------------ | ------------------ | -------------- |
 | hadoop1.x | HDFS                           | MR<计算和资源调度> |                |
 | hadoop2.x | HDFS                           | MR<仅计算>         | YARN<资源调度> |
