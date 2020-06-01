@@ -347,22 +347,22 @@ sbin/mr-jobhistory-daemon.sh start historyserver
 
     - 配置 yarn.log-aggregation-enable，打开日志聚集功能，默认关闭
 
-        ```xml
-        <property>
-            <description>Whether to enable log aggregation. Log aggregation collects
-              each container's logs and moves these logs onto a file-system, for e.g.
-              HDFS, after the application completes. Users can configure the
-              "yarn.nodemanager.remote-app-log-dir" and
-              "yarn.nodemanager.remote-app-log-dir-suffix" properties to determine
-              where these logs are moved to. Users can access the logs via the
-              Application Timeline Server.
-            </description>
-            <name>yarn.log-aggregation-enable</name>
-            <value>true</value>
-        </property>
-        ```
+      ```xml
+      <property>
+          <description>Whether to enable log aggregation. Log aggregation collects
+            each container's logs and moves these logs onto a file-system, for e.g.
+            HDFS, after the application completes. Users can configure the
+            "yarn.nodemanager.remote-app-log-dir" and
+            "yarn.nodemanager.remote-app-log-dir-suffix" properties to determine
+            where these logs are moved to. Users can access the logs via the
+            Application Timeline Server.
+          </description>
+          <name>yarn.log-aggregation-enable</name>
+          <value>true</value>
+      </property>
+      ```
 
-      - 配置 yarn.log-aggregation.retain-seconds，设置日志保留时间为7天
+    - 配置 yarn.log-aggregation.retain-seconds，设置日志保留时间为7天
 
           ```xml
           <property>
