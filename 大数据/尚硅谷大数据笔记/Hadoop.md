@@ -311,6 +311,89 @@
     - jsp
     - ip:8088/cluster (yarn的web页面)
 
+##### 配置历史服务器
+
+1. mapred-site.xml
+
+    - 配置 mapreduce.jobhistory.address 
+
+        ```xml
+        <property>
+            <name>mapreduce.jobhistory.address</name>
+            <value>IP地址或主机名:10020</value>
+            <description>MapReduce JobHistory Server IPC host:port</description>
+        </property>
+        ```
+
+    - 配置 mapreduce.jobhistory.webapp.address 
+
+        ```xml
+        <property>
+            <name>mapreduce.jobhistory.webapp.address</name>
+            <value>IP地址或主机名:19888</value>
+            <description>MapReduce JobHistory Server Web UI host:port</description>
+        </property>
+        ```
+
+##### 启动历史服务器
+
+```shell
+sbin/mr-jobhistory-daemon.sh start historyserver
+```
+
+##### 配置日志服务器
+
+1. yarn-site.xml
+
+    - 配置 yarn.log-aggregation-enable，打开日志聚集功能，默认关闭
+
+        ```xml
+        <property>
+            <description>Whether to enable log aggregation. Log aggregation collects
+              each container's logs and moves these logs onto a file-system, for e.g.
+              HDFS, after the application completes. Users can configure the
+              "yarn.nodemanager.remote-app-log-dir" and
+              "yarn.nodemanager.remote-app-log-dir-suffix" properties to determine
+              where these logs are moved to. Users can access the logs via the
+              Application Timeline Server.
+            </description>
+            <name>yarn.log-aggregation-enable</name>
+            <value>true</value>
+        </property>
+        ```
+
+      - 配置 yarn.log-aggregation.retain-seconds，设置日志保留时间为7天
+
+          ```xml
+          <property>
+              <description>How long to keep aggregation logs before deleting them.  -1 disables. 
+              Be careful set this too small and you will spam the name node.</description>
+              <name>yarn.log-aggregation.retain-seconds</name>
+              <value>604800</value>
+          </property> 
+          ```
+
+##### 启动日志服务器
+
+1. 重启 YARN
+
+    ```shell
+    yarn-daemon.sh restart resoucemanager
+    yarn-daemon.sh restart nodemanager
+    ```
+
+2. 重启历史服务器
+
+    ```shell
+    mr-jobhistory-daemon.sh restart historyserver
+    ```
+
+3. 查看 log 
+
+    IP:19888
+
+4. 
+
 #### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
 > 搭建一个完整的集群
