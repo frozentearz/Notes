@@ -189,6 +189,33 @@
 
     **问：单节点在不改的情况下会在本地保存三份数据吗？为什么？ (待实操)**
 
+##### 启动伪分布式模式
+
+1. 格式化 NameNode —— 为了生成工作空间，格式化之前防止Id不一致需要删除 /data 以及 /log 目录
+
+    ```shell
+    bin/hdfs namenode -format
+    ```
+
+2. 启动 NameNode
+
+    ```shell
+    sbin/hadoop-daemon.sh start namenode
+    ```
+
+3. 启动 DataNode
+
+    ```shell
+    sbin/hadoop-daemon.sh start datanode
+    ```
+
+4. 查看是否正常启动
+
+    - jsp
+    - ip:50070
+
+5. 
+
 #### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
 > 搭建一个完整的集群
