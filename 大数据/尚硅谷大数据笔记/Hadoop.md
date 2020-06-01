@@ -211,11 +211,11 @@
     ```xml
     <property>
         <name>dfs.replication</name>
-          <value>1</value>
-          <description>Default block replication. 
+        <value>1</value>
+        <description>Default block replication. 
           The actual number of replications can be specified when the file is created.
           The default is used if replication is not specified in create time.
-          </description>
+        </description>
     </property>
     ```
     
@@ -364,14 +364,14 @@ sbin/mr-jobhistory-daemon.sh start historyserver
 
     - 配置 yarn.log-aggregation.retain-seconds，设置日志保留时间为7天
 
-          ```xml
-          <property>
-              <description>How long to keep aggregation logs before deleting them.  -1 disables. 
-              Be careful set this too small and you will spam the name node.</description>
-              <name>yarn.log-aggregation.retain-seconds</name>
-              <value>604800</value>
-          </property> 
-          ```
+      ```xml
+      <property>
+          <description>How long to keep aggregation logs before deleting them.  -1 disables. 
+          Be careful set this too small and you will spam the name node.</description>
+          <name>yarn.log-aggregation.retain-seconds</name>
+          <value>604800</value>
+      </property> 
+      ```
 
 ##### 启动日志服务器
 
