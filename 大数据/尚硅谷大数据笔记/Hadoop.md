@@ -134,7 +134,7 @@
 
     >   ```shell
     >   cd /opt
-    >   mkdir -p module software
+    >   mkdir module software
     >   chown xxx:xxx module/ software/
     >   ```
 
