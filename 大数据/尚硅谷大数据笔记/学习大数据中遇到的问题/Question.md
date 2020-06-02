@@ -30,7 +30,7 @@
 >   3.  而目前的磁盘传输速率普遍是100M/s
 >   4.  最佳为每一秒传输一个块，则最佳块大小为100M，取整得128M
 
-#### hadoop fs、hadoop dfs与hdfs dfs命令的区别是什么？
+#### hadoop-fs、hadoop-dfs与hdfs-dfs命令的区别是什么？
 
 >   -   hadoop fs 适用范围最广，可以操作HDFS、本地文件系统、HFTP等
 >   -   hadoop dfs 用于操作HDFS，但是已经不推荐使用

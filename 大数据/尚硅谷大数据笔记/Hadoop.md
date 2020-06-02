@@ -94,18 +94,16 @@
     >   sudo vim /etc/udev/reles.d/70-persistent-net.reles
     >   ```
     >
-    >   因为克隆虚拟机会导致 MAC 地址一致，从而导致自带的第一个网卡无效
-    >
-    >   需要删除无效网卡，新 MAC 地址网卡改名为 eth0，复制新 MAC 地址到：
+    >   因为克隆虚拟机会导致 MAC 地址一致，从而导致自带的第一个网卡无效并创建一个新的网卡，需要删除无效的eth0网卡配置，新 MAC 地址网卡改名为 eth0，复制新 MAC 地址到：
     >
     >   ```shell
-    >   vim /etc/stsconfig/network-scripts/ifconfig-eth0
+    >vim /etc/stsconfig/network-scripts/ifconfig-eth0
     >   ```
-    >
+    >   
     >   覆盖其中无效的 MAC 地址
     >
     >   再修改其中静态 ip 为所需要的 ip
-
+    
 4.  修改主机名
 
     ```shell
@@ -156,10 +154,10 @@
 
 ### 3. Hadoop 目录结构
 
-- bin —— hadoop 组件调用命令(hadoop、hdfs、mapred、yarn)
+- bin —— hadoop 组件调用命令(组件包括hadoop、hdfs、mapred、yarn)
 - etc —— hadoop 配置文件
 - lib —— 依赖包，主要是so文件，系统相关文件
-- sbin —— hadoop 启动停止等程序
+- sbin —— hadoop 及其组件启动停止等程序
 - share —— 文档及各个组件的工具包
 
 # 第三节、Hadoop 的使用
@@ -189,7 +187,7 @@
         ```xml
         <property>
             <name>fs.defaultFS</name>
-            <value>hdfs://HOSTNAME:9000</value>
+            <value>hdfs://主机名:9000</value>
             <description>The name of the default file system.  A URI whose
             scheme and authority determine the FileSystem implementation.  The
             uri's scheme determines the config property (fs.SCHEME.impl) naming
@@ -299,7 +297,7 @@
 
 #### 启动 YARN
 
-0. 检查 NameNode 和 DataNode 已经启动，关闭的要先关闭 YARN 再关闭 HDFS
+0. 检查 NameNode 和 DataNode 已经启动，关闭流程要先关闭 YARN 再关闭 HDFS
 
 1. 启动 YARN (RecourseManager和NodeManager)
 

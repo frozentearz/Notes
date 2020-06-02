@@ -60,7 +60,7 @@
 
 **问：为什么HDFS的块的大小不能设置太大也不能设置太小？** [点此查看](./学习大数据中遇到的问题/Question.md#为什么HDFS的块的大小不能设置太大也不能设置太小)
 
-**问：为什么hadoop2.x版本的块大小默认设置为128M？** [点此查看](./学习大数据中遇到的问题/Question.md#为什么HDFS的块的大小不能设置太大也不能设置太小)
+**问：为什么hadoop2.x版本的块大小默认设置为128M？** [点此查看](./学习大数据中遇到的问题/Question.md#为什么hadoop2.x版本的块大小默认设置为128M？)
 
 # 第二节、HDFS 使用
 
@@ -70,7 +70,7 @@
 hadoop fs xxx
 ```
 
-**问：hadoop fs 命令和前面提到的 hdfs dfs 命令有区别吗？** [点此查看](./学习大数据中遇到的问题/Question.md#hadoop fs、hadoop dfs与hdfs dfs命令的区别是什么？)
+**问：hadoop fs 命令和前面提到的 hdfs dfs 命令有区别吗？** [点此查看](./学习大数据中遇到的问题/Question.md#hadoop-fs、hadoop-dfs与hdfs-dfs命令的区别是什么？)
 
 1.  -moveFromLocal 从本地剪贴到hdfs
 2.  -copyFromLocal 从本地复制到hdfs
