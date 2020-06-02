@@ -33,4 +33,5 @@
 #### hadoop fs、hadoop dfs与hdfs dfs命令的区别是什么？
 
 >   -   hadoop fs 适用范围最广，可以操作HDFS、本地文件系统、HFTP等
->   -   hadoop dfs 特定针对HDFS的文件系统的相关操作，但是已经不推荐使用。
+>   -   hadoop dfs 特定针对HDFS的文件系统的相关操作，但是已经不推荐使用
+>   -   hdfs dfs 操作HDFS，推荐使用
