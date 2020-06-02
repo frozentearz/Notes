@@ -71,3 +71,11 @@ hadoop fs xxx
 ```
 
 **问：hadoop fs 命令和前面提到的 hdfs dfs 命令有区别吗？** [点此查看](./学习大数据中遇到的问题/Question.md#hadoop fs、hadoop dfs与hdfs dfs命令的区别是什么？)
+
+1.  -moveFromLocal 从本地剪贴到hdfs
+2.  -copyFromLocal 从本地复制到hdfs
+3.  -copyFToLocal [-get] 从hdfs复制到本地
+4.  -getmerge 合并下载多个文件
+5.  -appendToFile 追加一个文件到已存在的文件末尾
+6.  
+
