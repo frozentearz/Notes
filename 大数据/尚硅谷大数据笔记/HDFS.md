@@ -77,5 +77,21 @@ hadoop fs xxx
 3.  -copyFToLocal [-get] 从hdfs复制到本地
 4.  -getmerge 合并下载多个文件
 5.  -appendToFile 追加一个文件到已存在的文件末尾
-6.  
+
+## 二、用Java调用HDFS的API进行开发
+
+### 1. 环境准备
+
+1. 下载安装 JDK 并配置环境变量
+2. 下载对应系统所需要的 hadoop jar 包
+3. 配置 `HADOOP_HOME` 并添加 `HADOOP_HOME\bin` 到 `PATH` 环境变量
+4. 可下载 Maven 并配置
+5. 可优化相关 IDEA 设置
+
+### 2. 开始开发测试
+
+1. 创建 maven 项目，导入相关依赖：`junit`、`log4j`、`hadoop-common`、`hadoop-client`、`hadoop-hdfs`
+2. 配置 log4j
+3. 创建测试类
+4. 编写代码，[进入实操](./实操记录/用java对hadoopAPI进行开发测试.md)
 

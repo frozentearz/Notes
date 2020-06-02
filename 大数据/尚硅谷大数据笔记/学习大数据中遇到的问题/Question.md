@@ -35,3 +35,7 @@
 >   -   hadoop fs 适用范围最广，可以操作HDFS、本地文件系统、HFTP等
 >   -   hadoop dfs 用于操作HDFS，但是已经不推荐使用
 >   -   hdfs dfs 用于操作HDFS，推荐使用
+
+#### edits.inprogress是namenode启动之前存在吗？
+
+> 启动后创建的，最新记录的操作日志
