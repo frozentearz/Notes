@@ -170,7 +170,7 @@
 
 > 在单节点上作为单个Java进程运行，对于调试很有用
 
-<small>ps: 可以使用本地模式尝试运行官方grep和wordcount案例</small>
+<small>ps: 可以使用本地模式尝试运行官方[grep案例](./实操记录/用Hadoop在Linux文件系统上跑grep案例.md)和[wordcount案例](./实操记录/用Hadoop在Linux文件系统上跑wordcount案例.md)</small>
 
 ### 伪分布式模式  [Pseudo-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation)
 
@@ -223,7 +223,7 @@
     </property>
     ```
     
-    **问：单节点在不改的情况下会在本地保存三份数据吗？为什么？ (待实操)**
+    **问：单节点在不改的情况下会在本地保存三份数据吗？为什么？** [点此查看](./学习大数据中遇到的问题/Question.md#单节点在不改的情况下会在本地保存三份数据吗？为什么？)
 
 #### 启动 HDFS
 
@@ -308,7 +308,7 @@
     yarn-daemon.sh start nodemanager
     ```
 
-    **如果不按此顺序启动会怎么样？**
+    **问：如果先启动nodemanager再启动resourcemanager会报错吗？** [点此查看](./学习大数据中遇到的问题/Question.md#如果先启动nodemanager再启动resourcemanager会报错吗？)
 
 2. 查看是否启动
 
