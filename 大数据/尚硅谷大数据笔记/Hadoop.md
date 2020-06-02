@@ -1,8 +1,8 @@
 [TOC]
 
-## 第一节、Hadoop 框架介绍
+# 第一节、Hadoop 框架介绍
 
-### 一、Hadoop 三大版本
+## 一、Hadoop 三大版本
 
 1. Apache 版本
 
@@ -16,21 +16,21 @@
 
     > 成立之初吸纳了Hadoop工程师贡献的80%源代码，所以文档特别全面
 
-### 二、Hadoop 的优势
+## 二、Hadoop 的优势
 
 1. 高可靠性
 2. 高扩展性
 3. 高效性
 4. 高容错性
 
-### **三、Hadoop 组成** :star:
+## **三、Hadoop 组成** :star:
 
 |           | Hadoop distributed file System | MapReduce          | YARN           |
 | --------- | ------------------------------ | ------------------ | -------------- |
 | hadoop1.x | HDFS                           | MR<计算和资源调度> |                |
 | hadoop2.x | HDFS                           | MR<仅计算>         | YARN<资源调度> |
 
-#### 1. HDFS —— Hadoop distributed file System
+### 1. HDFS —— Hadoop distributed file System
 
 1. NameNode(nn)
 
@@ -44,7 +44,7 @@
 
     > 给NameNode干活的（待补充）
 
-#### 2. YARN
+### 2. YARN
 
 1. ResourceManager(rm)
 
@@ -62,7 +62,7 @@
 
     > 对任务运行环境的抽象，封装了一个节点的资源，一个节点资源的抽象
 
-#### 3. MapReduce —— 基于硬盘的离线计算框架
+### 3. MapReduce —— 基于硬盘的离线计算框架
 
 1. Map 阶段
 
@@ -72,13 +72,13 @@
 
     > 合—— 把处理完的数据合并汇总 **问：老师讲的是把Map处理完的数据通过Reduce汇总，但是确定处理数据的执行者是Map吗？还是Map仅仅只是一个间接者，需要分给其他组件跑完之后从其他组件汇总数据**
 
-### 四、大数据技术生态体系
+## 四、大数据技术生态体系
 
 ![image-20200601014418210](https://i.loli.net/2020/06/01/GAsaJTOxESY41gp.png)
 
-## 第二节、Hadoop 环境搭建(虚拟机)
+# 第二节、Hadoop 环境搭建(虚拟机)
 
-### 一、操作系统准备
+## 一、操作系统准备
 
 1.  准备一份原镜像(硬盘给50G，后期改硬盘大小很难改、NAT网络模式)
 
@@ -138,19 +138,19 @@
 
 8.  SSH 测试连接
 
-### 二、软件组件安装
+## 二、软件组件安装
 
-#### 1. JDK 安装
+### 1. JDK 安装
 
 ​	网上教程太多，略过
 
-#### 2. Hadoop 安装
+### 2. Hadoop 安装
 
 1. 下载&解压(好像需要编译，暂时先拿老师提供的已编译版本解压)
 
 2. 配置环境变量 `HADOOP_HOME`，添加 `HADOOP_HOME\bin` 和 `HADOOP_HOME\sbin` 到 `PATH`
 
-#### 3. Hadoop 目录结构
+### 3. Hadoop 目录结构
 
 - bin —— hadoop 组件调用命令(hadoop、hdfs、mapred、yarn)
 - etc —— hadoop 配置文件
@@ -158,21 +158,21 @@
 - sbin —— hadoop 启动停止等程序
 - share —— 文档及各个组件的工具包
 
-## 第三节、Hadoop 的使用
+# 第三节、Hadoop 的使用
 
-### 1. Hadoop 三种运行模式
+## 1. Hadoop 三种运行模式
 
-#### 本地(独立)模式  [Local (Standalone) Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation)
+### 本地(独立)模式  [Local (Standalone) Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation)
 
 > 在单节点上作为单个Java进程运行，对于调试很有用
 
 <small>ps: 可以使用本地模式尝试运行官方grep和wordcount案例</small>
 
-#### 伪分布式模式  [Pseudo-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation)
+### 伪分布式模式  [Pseudo-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation)
 
 > 以伪分布式模式在单节点上运行
 
-##### 配置 HDFS
+#### 配置 HDFS
 
  1. hadoop-env.sh
 
@@ -221,7 +221,7 @@
     
     **问：单节点在不改的情况下会在本地保存三份数据吗？为什么？ (待实操)**
 
-##### 启动 HDFS
+#### 启动 HDFS
 
 1. 格式化 NameNode —— 为了生成工作空间，格式化之前防止 ClusterId 不一致需要删除 /data 以及 /log 目录
 
@@ -246,7 +246,7 @@
     - jsp
     - ip:50070 (hadoop的web页面)
 
-##### 配置 YARN 与 MapReduce (MapReduce 需要在 YARN 上运行)
+#### 配置 YARN 与 MapReduce (MapReduce 需要在 YARN 上运行)
 
 1. yarn-env.sh
 
@@ -293,9 +293,9 @@
     </property>
     ```
 
-##### 启动 YARN
+#### 启动 YARN
 
-0. 检查 NameNode 和 DataNode 已经启动
+0. 检查 NameNode 和 DataNode 已经启动，关闭的要先关闭 YARN 再关闭 HDFS
 
 1. 启动 YARN (RecourseManager和NodeManager)
 
@@ -311,7 +311,7 @@
     - jsp
     - ip:8088/cluster (yarn的web页面)
 
-##### 配置历史服务器
+#### 配置历史服务器
 
 1. mapred-site.xml
 
@@ -335,13 +335,13 @@
         </property>
         ```
 
-##### 启动历史服务器
+#### 启动历史服务器
 
 ```shell
 sbin/mr-jobhistory-daemon.sh start historyserver
 ```
 
-##### 配置日志服务器
+#### 配置日志服务器
 
 1. yarn-site.xml
 
@@ -373,7 +373,7 @@ sbin/mr-jobhistory-daemon.sh start historyserver
       </property> 
       ```
 
-##### 启动日志服务器
+#### 启动日志服务器
 
 1. 重启 YARN
 
@@ -392,10 +392,10 @@ sbin/mr-jobhistory-daemon.sh start historyserver
 
     IP:19888
 
-#### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
+### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
 > 搭建一个完整的集群
 
-##### 配置全分布式运行
+#### 配置全分布式运行
 
 1. 
