@@ -398,4 +398,4 @@ sbin/mr-jobhistory-daemon.sh start historyserver
 
 ##### 配置全分布式运行
 
-1. TODO
+1. 
