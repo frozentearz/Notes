@@ -97,7 +97,7 @@
     >   因为克隆虚拟机会导致 MAC 地址一致，从而导致自带的第一个网卡无效并创建一个新的网卡，需要删除无效的eth0网卡配置，新 MAC 地址网卡改名为 eth0，复制新 MAC 地址到：
     >
     >   ```shell
-    >vim /etc/stsconfig/network-scripts/ifconfig-eth0
+    >vim /etc/sysconfig/network-scripts/ifconfig-eth0
     >   ```
     >   
     >   覆盖其中无效的 MAC 地址
@@ -168,7 +168,7 @@
 
 > 在单节点上作为单个Java进程运行，对于调试很有用
 
-<small>ps: 可以使用本地模式尝试运行官方[grep案例](./实操记录/用Hadoop在Linux文件系统上跑grep案例.md)和[wordcount案例](./实操记录/用Hadoop在Linux文件系统上跑wordcount案例.md)</small>
+<small>ps: 可以使用本地模式尝试运行官方 [grep 案例](./实操记录/用Hadoop在Linux文件系统上跑grep案例.md)</small>
 
 ### 伪分布式模式  [Pseudo-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation)
 
