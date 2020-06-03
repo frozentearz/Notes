@@ -39,3 +39,7 @@
 #### edits.inprogress是namenode启动之前存在吗？
 
 > 启动后创建的，最新记录的操作日志
+
+#### namenode启动的时候怎么判断要加载哪些edits文件?
+
+>   
