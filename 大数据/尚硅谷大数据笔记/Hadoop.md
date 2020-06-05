@@ -394,10 +394,49 @@ sbin/mr-jobhistory-daemon.sh start historyserver
 
     IP:19888
 
-### 全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
+### 完全分布式运行 [Fully-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Fully-Distributed_Operation)
 
 > 搭建一个完整的集群
 
-#### 配置全分布式运行
+#### 配置完全分布式
 
-1. 
+1. 准备多台虚拟机
+
+2. 复制 JDK 和 Hadoop 到各个虚拟机上，并配置环境变量
+
+3. 修改 Hadoop 配置文件
+
+    在伪分布式运行的配置文件的基础上进行修改
+
+    -   hdfs-site.xml
+
+        ```xml
+        <!-- 指定Hadoop辅助名称(secondarynamenode)节点主机配置 -->
+        <property>
+              <name>dfs.namenode.secondary.http-address</name>
+              <value>想部署的节点名:50090</value>
+        </property>
+        ```
+
+4. 看情况格式化 NameNode，再删除data和log数据
+
+5. 配置 SSH 无密登录(方便批量启动停止集群)
+
+    ```shell
+    ssh-keygen -t rsa #生成秘钥公钥
+    ssh-copy-id hadoopxxx #公钥复制到每一台机器
+    ```
+
+6. 配置 slaves (用来标示 DataNode)
+
+    ```shell
+    vim /opt/module/hadoop-2.7.2/etc/hadoop/slaves
+    ```
+
+7. 启动
+
+    ```shell
+    start-hadoop.sh
+    start-yarn.sh
+    ```
+
