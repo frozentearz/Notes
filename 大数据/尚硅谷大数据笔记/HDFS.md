@@ -105,7 +105,7 @@ hadoop fs xxx
 2. NameNode响应可以上传文件
 3. 客户端收到响应后再本地对文件分块
 4. 客户端向NameNode请求上传第一个块文件
-5. NameNode根据 [**机架感知**](#三、机架感知) 返回若干节点给客户端
+5. NameNode根据 [**机架感知**](#三机架感知) 返回若干节点给客户端
 6. 客户端获取节点后选择一个节点(DataNode1)建立文件传输通道
 7. DataNode向其他节点(DataNode2)请求建立文件传输通道，二号DataNode再向其他节点(DataNode3)建立传输通道
 8. 等待最后一个DataNode全部建立传输通道后，客户端在本地把第一块需要上传的Block拆成一个个64K大小的packet，通过PIPE LINE传输给DataNode
@@ -145,7 +145,7 @@ hadoop fs xxx
 
 ### 第一阶段：NameNode启动
 
-1.  第一次启动NameNode格式化后，创建Fsimage和Edits文件。如果不是第一次启动，直接加载编辑日志和镜像文件到内存，加载时为[安全模式](#五、NameNode的安全模式)(只读)
+1.  第一次启动NameNode格式化后，创建Fsimage和Edits文件。如果不是第一次启动，直接加载编辑日志和镜像文件到内存，加载时为[安全模式](#五NameNode的安全模式)(只读)
 
 2.  客户端对元数据进行增删改的请求
 3.  NameNode记录操作日志，更新滚动日志
