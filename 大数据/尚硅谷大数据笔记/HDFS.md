@@ -109,7 +109,7 @@ hadoop fs xxx
 6. 客户端获取节点后选择一个节点(DataNode1)建立文件传输通道
 7. DataNode向其他节点(DataNode2)请求建立文件传输通道，二号DataNode再向其他节点(DataNode3)建立传输通道
 8. 等待最后一个DataNode全部建立传输通道后，客户端在本地把第一块需要上传的Block拆成一个个64K大小的packet，通过PIPE LINE传输给DataNode
-9. 客户端与dataNode1传输完毕，dataNode1则返回一个成功答应
+9. 客户端与DataNode1传输完毕，DataNode1则返回一个成功答应
 10. 客户端收到答应后再向NameNode发送第一块传输完成信息，如果有第二块则重复以上流程
 11. NameNode收到第一块传输完成后会对集群内的副本数进行数量校验，如果不足指定副本数则自动进行异步的同步
 
@@ -258,3 +258,18 @@ hadoop fs xxx
 -   bin/hdfs dfsadmin -safemode wait    （功能描述：等待安全模式状态）
 
 ## 六、NameNode多目录配置
+
+>   NameNode的本地目录可以配置成多个，且每个目录存放内容相同，增加了可靠性
+
+1.  在 hdfs-site.xml 增加配置
+
+    ```xml
+    <property>
+        <name>dfs.namenode.name.dir</name>
+    <value>file:///${hadoop.tmp.dir}/dfs/name1,file:///${hadoop.tmp.dir}/dfs/name2</value>
+    </property>
+    ```
+
+2.  停止集群，删除data和logs中所有数据
+
+3.  格式化集群并启动
