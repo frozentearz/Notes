@@ -47,4 +47,48 @@
 
 # 第二节、Hive的安装和配置
 
-## 一、下载Hive
+## 一、下载安装
+
+### 1. 下载Hive
+
+>   查看跟Hadoop版本对应的Hive版本并下载
+
+### 2. 安装Hive
+
+1.  下载tar.gz包直接解压
+2.  下载Hive项目并自己用maven打包
+
+### 3. 基本配置
+
+-   配置HIVE环境变量并添加到PATH中
+-   在Hive/conf下生成hive-env.sh，修改里面的HADOOP_HOME和HIVE_CONF_DIR
+
+>   集群不是一个人使用，所以需要在HDFS中的/user/hive/warehouse和/tmp给予对应用户或组的写入权限
+>
+>   或者在hdfs-site.xml中关闭权限检查
+>
+>   ```xml
+>   <property>
+>   	<name>dfs.permissions.enable</name>
+>   	<value>false</value>
+>   </property>
+>   ```
+
+### 4. 启动Hive
+
+1.  Hive是把数据存在HDFS，所以要先启动HDFS
+2.  Hive底层是MapReduce，MapReduce是在Yarn上运行，所以要再启动Yarn
+3.  启动Hive客户端
+
+### 5. 加载本地数据到Hive
+
+```SQL
+create table xxx(xxx int,xxxx string) row format delimited fields terminated by "\t";
+load data local inpath "$PWD" into table xxx;
+```
+
+### 6. Hive元数据配置到MySQL
+
+-   因为MetaData默认存在derby数据库中，derby是单用户数据库，从而导致同时只能一个用户登录到Hive中，现在需要安装MySQL，把MetaData存到MySQL中来解决此问题
+-   在MySQL中配置user可以远程登录，使集群内的机器都能使用MySQL来存储MetaData实现多Hive客户端登录
+-   驱动拷贝到Hive依赖库中
