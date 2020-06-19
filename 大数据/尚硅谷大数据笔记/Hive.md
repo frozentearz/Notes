@@ -15,10 +15,10 @@
 ### 优点
 
 1.  采用类SQL语法，简单容易上手
-2.  避免学习MR，减少学习成本
+2.  避免学习MapReduce，减少学习成本
 3.  延时执行高，擅长离线计算常用于数据分析
 4.  延时执行高，所以擅长处理大数据，对小数据没有优势
-5.  可自定义函数
+    5.  可自定义函数
 
 ### 缺点
 
@@ -31,7 +31,7 @@
 
 ## 3. Hive的架构原理
 
-![image-20200617154011484](D:/Program Files/Typora/upload/image-20200617154011484.png)
+![image-20200617154011484](https://i.loli.net/2020/06/19/PcyjtTZMk8CI9Jb.png)
 
 ## 4. Hive和数据库的区别比较
 
@@ -42,7 +42,7 @@
 | 索引     | 针对列建立索引可以对于少量的特定条件数据访问具有非常高的效率 | 不能建立索引，加载数据时不会对数据进行任何处理，查询时会暴力扫描整个数据 |
 | 执行     | 通常有自己的执行引擎                                         | 通过Hadoop提供的MapReduce来执行                              |
 | 执行延迟 | 仅数据少时延迟低                                             | 无论数据多少延迟都高                                         |
-| 扩展性   | 因ACID语义限制，Oracle数据最多只有100台                      | 数据存于HDFS，所以扩展性与HDFS一致，2009年雅虎最多达时到4000个节点左右 |
+| 扩展性   | 因ACID语义限制，Oracle数据库最多只有100台                    | 数据存于HDFS，所以扩展性与HDFS一致，2009年雅虎最多达时到4000个节点左右 |
 | 数据规模 | 规模较小                                                     | 可以利用MapReduce进行并行计算，所以支持很大的规模数据        |
 
 # 第二节、Hive的安装和配置
@@ -55,8 +55,9 @@
 
 ### 2. 安装Hive
 
-1.  下载tar.gz包直接解压
-2.  下载Hive项目并自己用maven打包
+-   下载tar.gz包直接解压
+
+-   下载Hive项目并自己用maven打包
 
 ### 3. 基本配置
 
@@ -83,12 +84,66 @@
 ### 5. 加载本地数据到Hive
 
 ```SQL
-create table xxx(xxx int,xxxx string) row format delimited fields terminated by "\t";
-load data local inpath "$PWD" into table xxx;
+create table xxx(xxx int,xxxx string) row format delimited fields terminated by "\t"; --  建表规定字段间分割符为缩进
+load data local inpath "$PWD" into table xxx; -- 加载数据到Hive中
 ```
 
-### 6. Hive元数据配置到MySQL
+### 6. Hive元数据(MetaData)配置到MySQL
 
--   因为MetaData默认存在derby数据库中，derby是单用户数据库，从而导致同时只能一个用户登录到Hive中，现在需要安装MySQL，把MetaData存到MySQL中来解决此问题
+-   因为MetaData默认存在Hive自带的derby数据库中，derby是单用户数据库，从而导致同时只能一个用户登录到Hive中，现在需要安装MySQL，把MetaData存到MySQL中来解决此问题
+
 -   在MySQL中配置user可以远程登录，使集群内的机器都能使用MySQL来存储MetaData实现多Hive客户端登录
--   驱动拷贝到Hive依赖库中
+
+-   驱动拷贝到Hive依赖库/hive/lib中
+
+-   修改hive-site.xml
+
+    ```xml
+    <?xml version="1.0"?>
+    <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+    <configuration>
+    	<property>
+    	  <name>javax.jdo.option.ConnectionURL</name>
+    	  <value>jdbc:mysql://MySQL主机名:3306/metastore?createDatabaseIfNotExist=true</value>
+    	  <description>JDBC connect string for a JDBC metastore</description>
+    	</property>
+    
+    	<property>
+    	  <name>javax.jdo.option.ConnectionDriverName</name>
+    	  <value>com.mysql.jdbc.Driver</value>
+    	  <description>Driver class name for a JDBC metastore</description>
+    	</property>
+    
+    	<property>
+    	  <name>javax.jdo.option.ConnectionUserName</name>
+    	  <value>root</value>
+    	  <description>username to use against metastore database</description>
+    	</property>
+    
+    	<property>
+    	  <name>javax.jdo.option.ConnectionPassword</name>
+    	  <value>你的MySQL密码</value>
+    	  <description>password to use against metastore database</description>
+    	</property>
+    </configuration>
+    ```
+
+    ## 二、Hive的使用
+
+    ### 1. Hive两种执行HQL方式
+
+    1.  ```shell
+        hive -e "你的HQL"
+        ```
+
+    2.  ```shell
+        hive -f 你的HQL文件
+        ```
+
+    ### 2. 退出Hive
+- exit&quit
+    在新版的hive中没区别了，在以前的版本是有的：
+
+    exit:先隐性提交数据，再退出；
+
+    quit:不提交数据，退出；
