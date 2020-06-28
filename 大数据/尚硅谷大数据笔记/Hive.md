@@ -141,9 +141,9 @@ load data local inpath "$PWD" into table xxx; -- 加载数据到Hive中
         ```
 
     ### 2. 退出Hive
-- exit&quit
-    在新版的hive中没区别了，在以前的版本是有的：
-
-    exit:先隐性提交数据，再退出；
-
-    quit:不提交数据，退出；
+    -  exit&quit
+        在新版的hive中没区别了，在以前的版本是有的：
+    
+        ​	exit:先隐性提交数据，再退出；
+    
+    quit:不提交数据，退出；	
