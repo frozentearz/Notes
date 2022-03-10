@@ -120,6 +120,8 @@
     systemctl status/restart/stop/start/disable/enable firewalld.service
     ```
 
+    > **公司内网服务器群之间防火墙是关闭的吗？**
+
 6. 创建用户，给权限
 
     ```shell
@@ -173,6 +175,8 @@
 ### 伪分布式模式  [Pseudo-Distributed Mode](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation)
 
 > 以伪分布式模式在单节点上运行
+
+> **伪分布式模式有何作用？**
 
 #### 配置 HDFS
 
@@ -314,6 +318,8 @@
     - ip:8088/cluster (yarn的web页面)
 
 #### 配置历史服务器
+
+> 为了查看程序的历史运行情况，需要配置一下历史服务器
 
 1. mapred-site.xml
 

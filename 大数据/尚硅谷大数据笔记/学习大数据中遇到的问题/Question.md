@@ -2,9 +2,9 @@
 
 >   Map 处理，因为 Map 本身就是一个计算框架
 
-#### 处理完的数据Reduce是从哪里获取到的呢？Map还是其他组件？
+#### Map分完的数据按照K-V分发给Reduce，一个Reduce处理一个K的内容，具体源码是什么？
 
->   Map
+>   internal grouping //TODO 待实操
 
 #### 单节点在不改dfs.replication的情况下会在本地保存三份数据吗？为什么？
 
