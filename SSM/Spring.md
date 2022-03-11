@@ -227,7 +227,7 @@ User user2 = ac2.getBean("beanId", User.class);
 
        - value: 给基本类型和 String 类型属性赋值
 
-       - ref: 可以引用Spring容器里的 bean 作为数据类型
+       - ref: 可以引用 Spring 容器里的 bean 作为数据类型
 
          ```xml
          <bean id="xx" class="">
@@ -238,11 +238,102 @@ User user2 = ac2.getBean("beanId", User.class);
          <bean id="now" class="java.utils.Date"></bean> <!-- 被birthday引用 -->
          ```
 
+   - 使用 set 方法注入 / 使用p名称空间注入
+
+     - 在类中提供需要注入成员的 set 方法
+
+     - 普通 set 注入
+   
+       ``````xml
+       <!-- 通过配置文件给 bean 中的属性传值：使用 set 方法的方式
+       涉及的标签：
+       	property
+       属性：
+       	name：找的是类中 set 方法后面的部分
+       	ref：给属性赋值是其他 bean 类型的
+       	value：给属性赋值是基本数据类型和 string 类型的
+       实际开发中，此种方式用的较多。
+       -->
+       <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+       	<property name="name" value="test"></property>
+       	<property name="age" value="21"></property>
+       	<property name="birthday" ref="now"></property>
+       </bean>
+       <bean id="now" class="java.util.Date"></bean>
+       ``````
+   
+     - 使用p名称空间注入
+   
+       此种方式是通过在 xml 中导入 p 名称空间，使用 p:propertyName 来注入数据，它的本质仍然是调用类中的 set 方法实现注入功能
+   
+       ```xml
+       <beans xmlns="http://www.springframework.org/schema/beans"
+       	   xmlns:p="http://www.springframework.org/schema/p"  <!-- 这里引用 -->
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation=" http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+       <bean id="accountService"
+        class="com.itheima.service.impl.AccountServiceImpl4"
+        p:name="test" p:age="21" p:birthday-ref="now"/> <!-- 这里使用 -->
+       ```
+   
+   - 注入集合属性
+   
+     ```java
+     public class UserServiceImpl implements IUserService {
+         private String[] myStrs;
+         private List<String> myList;
+         private Set<String> mySet;
+         private Map<String,String> myMap;
+         private Properties myProps;
          
-
-   - 使用 set 方法注入 / 使用p名称空间注入集合属性
-
-   - 使用注解
+         public void setMyStrs(String[] myStrs) {
+         	this.myStrs = myStrs;
+         }
+        	//set方法
+         public void setMyProps(Properties myProps) {
+         	this.myProps = myProps;
+         }
+     }
+     ```
+   
+     ```xml
+     <!-- 注入集合数据
+     	List 结构的：
+     		array,list,set
+     	Map 结构的
+     		map,entry,props,prop
+     -->
+     <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+         <!-- 在注入集合数据时，只要结构相同，标签可以互换 -->
+         <!-- 给数组注入数据 -->
+         <property name="myStrs">
+             <set>/<list>/<array>
+                 <value>AAA</value>
+                 <value>BBB</value>
+                 <value>CCC</value>
+             </set>/</list>/</array>
+         </property>
+         
+         <!-- 注入 Map 数据 -->
+         <property name="myMap">
+             <props>
+                 <prop key="testA">aaa</prop>
+                 <prop key="testB">bbb</prop>
+             </props>
+         </property>
+         <!-- 注入 properties 数据 -->
+         <property name="myProps">
+             <map>
+                 <entry key="testA" value="aaa"></entry>
+                 <entry key="testB">
+                     <value>bbb</value>
+                 </entry>
+             </map>
+         </property>
+     </bean>
+     ```
 
 ### 三、Spring 中基于注解的 IoC 配置
 
