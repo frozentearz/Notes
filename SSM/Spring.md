@@ -337,6 +337,8 @@ User user2 = ac2.getBean("beanId", User.class);
 
 ### 三、Spring 中基于注解的 IoC 配置
 
+
+
 ### 四、IoC 的应用
 
 ## Part 3. AOP
