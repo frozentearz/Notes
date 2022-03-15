@@ -191,7 +191,7 @@ User user2 = ac2.getBean("beanId", User.class);
 
     详解版:
 
-    ![img](https://images2018.cnblogs.com/blog/1368782/201804/1368782-20180409204927593-1218853531.png)
+    ![img](https://img-blog.csdnimg.cn/20210707225212729.png?))
 
   - 多例对象
 
